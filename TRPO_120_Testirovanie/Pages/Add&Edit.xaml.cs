@@ -26,29 +26,40 @@ namespace TRPO_120_Testirovanie
             InitializeComponent();
             List<Group> groups = App.groups;
             groupChoise.ItemsSource = groups;
-            groupChoise.SelectedIndex = 0;
+            groupChoise.SelectedIndex = 1;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Testirovanie testirovanie = new Testirovanie();
-            
-            var req = from x in App.groups
-                      where x.GroupNumber == groupChoise.SelectedValue.ToString()
-                      select x.ID;
-            StudenInformation student = new StudenInformation
-            {
-                StudentID = Convert.ToInt32(StudID.Text),
-                GroupID = Convert.ToInt32(req.First()),
-                FirstName = FirstName.Text,
-                SecondName = SecondName.Text,
-                Patronymic = Patronymic.Text
-            };
 
-            App.StudenInformationList.Add(student);
-            testirovanie.StudenInformation.Add(student);
-            testirovanie.SaveChanges();
-            testirovanie.Dispose();
+            if (FirstName.Text == "" | StudID.Text == "" | SecondName.Text == "" | Patronymic.Text == "")
+            {
+                MessageBox.Show("Введите данные");
+            }
+            else
+            {
+                var req = from x in App.groups
+                          where x.GroupNumber == groupChoise.SelectedValue.ToString()
+                          select x.ID;
+                StudenInformation student = new StudenInformation
+                {
+                    StudentID = Convert.ToInt32(StudID.Text),
+                    GroupID = Convert.ToInt32(req.First()),
+                    FirstName = FirstName.Text,
+                    SecondName = SecondName.Text,
+                    Patronymic = Patronymic.Text
+                };
+
+                App.StudenInformationList.Add(student);
+                testirovanie.StudenInformation.Add(student);
+                testirovanie.SaveChanges();
+                testirovanie.Dispose();
+            }
+
+            App.mainPage = new MainPage("Преподаватель");
+            App.studentsView = new StudentsView();
+            App.mainPage.dbFrame.Navigate(App.studentsView);
         }
     }
 }
