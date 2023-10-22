@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0a4d39d5277c435ca9e7129767ef1640" Name="Diagram1">
+        <EntityTypeShape EntityType="PR29Model.Group" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.QuestType" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.Role" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.StudenInformation" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.TestQInformation" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.TestReport" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR29Model.Users" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="PR29Model.FK_StudenInformation_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="PR29Model.FK_TestQInformation_QuestType" ManuallyRouted="false" />
+        <AssociationConnector Association="PR29Model.FK_Users_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="PR29Model.FK_TestReport_StudenInformation" ManuallyRouted="false" />
+        <AssociationConnector Association="PR29Model.FK_TestReport_TestQInformation" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
