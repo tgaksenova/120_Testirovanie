@@ -20,7 +20,7 @@
 
             
             <StackPanel Grid.Row="1">
-                <TextBox x:Name="Search" VerticalContentAlignment="Center" Height="50" Margin="30,20,30,0"/>
+                <TextBox  TextChanged="Search_TextChanged" x:Name="Search" VerticalContentAlignment="Center" Height="50" Margin="30,20,30,0"/>
                 <Button x:Name="Testbut" Height="50" Content="Тесты" Click="Tests_Click" Margin="30,20,30,0"/>
                 <Button x:Name="Questbut" Height="50" Content="Вопросы" Click="Questions_Click" Margin="30,20,30,0"/>
                 <Button x:Name="Studbut" Height="50" Content="Студенты" Click="Students_Click" Margin="30,20,30,0"/>

@@ -21,12 +21,30 @@ namespace TRPO_120_Testirovanie
     /// </summary>
     public partial class Add_Edit : Page
     {
+        int studusId;
+        bool isAddOrEdit = false;
+        public Add_Edit(int studentID)
+        {
+            InitializeComponent();
+            List<Group> groups = App.groups;
+            groupChoise.ItemsSource = groups;
+
+            StudenInformation studen = App.StudenInformationList.Where(x=>x.StudentID==studentID).First();
+            FirstName.Text = studen.FirstName;
+            StudID.Text = studen.StudentID.ToString();
+            SecondName.Text = studen.SecondName;
+            Patronymic.Text = studen.Patronymic;
+            isAddOrEdit = true;
+            studusId = studentID;
+            groupChoise.SelectedIndex = groups.IndexOf(groups.Where(x => x.ID == studen.GroupID).First());
+            //MessageBox.Show(groupChoise.Items.IndexOf(App.groups.Where(x => x.ID == studen.GroupID).First()).ToString());
+        }
         public Add_Edit()
         {
             InitializeComponent();
             List<Group> groups = App.groups;
             groupChoise.ItemsSource = groups;
-            groupChoise.SelectedIndex = 1;
+            groupChoise.SelectedIndex = 0;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -39,27 +57,56 @@ namespace TRPO_120_Testirovanie
             }
             else
             {
-                var req = from x in App.groups
-                          where x.GroupNumber == groupChoise.SelectedValue.ToString()
-                          select x.ID;
-                StudenInformation student = new StudenInformation
+                if (isAddOrEdit) {
+                    var studen =testirovanie.StudenInformation.Single(x=>x.StudentID==studusId);
+                    var req = from x in App.groups
+                              where x.GroupNumber == groupChoise.SelectedValue.ToString()
+                              select x.ID;
+                    studen.StudentID = Convert.ToInt32(StudID.Text);
+                    studen.GroupID = Convert.ToInt32(req.First());
+                    studen.Group = testirovanie.Group.Single(x => x.GroupNumber==groupChoise.SelectedValue.ToString());
+                    studen.FirstName = FirstName.Text;
+                    studen.SecondName = SecondName.Text;
+                    studen.Patronymic = Patronymic.Text;
+                    foreach (var item in testirovanie.StudenInformation)
+                    {
+                        var a = item.GroupID;
+                        item.Group = testirovanie.Group.Single(x=>x.ID==a);
+                    }
+                    testirovanie.SaveChanges();
+                    App.StudenInformationList = testirovanie.StudenInformation.ToList();
+                    testirovanie.Dispose();
+                }
+                else
                 {
-                    StudentID = Convert.ToInt32(StudID.Text),
-                    GroupID = Convert.ToInt32(req.First()),
-                    FirstName = FirstName.Text,
-                    SecondName = SecondName.Text,
-                    Patronymic = Patronymic.Text
-                };
-
-                App.StudenInformationList.Add(student);
-                testirovanie.StudenInformation.Add(student);
-                testirovanie.SaveChanges();
-                testirovanie.Dispose();
+                    var req = from x in App.groups
+                              where x.GroupNumber == groupChoise.SelectedValue.ToString()
+                              select x.ID;
+                    StudenInformation student = new StudenInformation
+                    {
+                        StudentID = Convert.ToInt32(StudID.Text),
+                        GroupID = Convert.ToInt32(req.First()),
+                        FirstName = FirstName.Text,
+                        SecondName = SecondName.Text,
+                        Patronymic = Patronymic.Text
+                    };
+                    
+                    testirovanie.StudenInformation.Add(student);
+                    testirovanie.SaveChanges();
+                    foreach (var item in testirovanie.StudenInformation)
+                    {
+                        var a = item.GroupID;
+                        item.Group = testirovanie.Group.Single(x => x.ID == a);
+                    }
+                    testirovanie.SaveChanges();
+                    App.StudenInformationList = testirovanie.StudenInformation.ToList();
+                    testirovanie.Dispose();
+                }
+                //App.mainPage = new MainPage("Преподаватель");
+                App.studentsView = new StudentsView();
+                App.mainPage.dbFrame.Navigate(App.studentsView);
             }
-
-            App.mainPage = new MainPage("Преподаватель");
-            App.studentsView = new StudentsView();
-            App.mainPage.dbFrame.Navigate(App.studentsView);
+            
         }
     }
 }

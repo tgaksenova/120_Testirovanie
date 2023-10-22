@@ -17,7 +17,7 @@ namespace TRPO_Testirovanie
 
     public partial class App : Application
     {
-        Testirovanie testirovanie = new Testirovanie();
+        
         public static Auth_Register Auth_Register;
         public static Register register;
         public static Auth auth;
@@ -37,6 +37,7 @@ namespace TRPO_Testirovanie
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Testirovanie testirovanie = new Testirovanie();
             TestsList = testirovanie.TestReport.ToList();
             StudenInformationList = testirovanie.StudenInformation.ToList();
             TestQInformationList = testirovanie.TestQInformation.ToList();
@@ -44,8 +45,7 @@ namespace TRPO_Testirovanie
             questTypes = testirovanie.QuestType.ToList();
             users = testirovanie.Users.ToList();
             role = testirovanie.Role.ToList();
-
-            testirovanie.Dispose();
+            //testirovanie.Dispose();
         }
     }
 

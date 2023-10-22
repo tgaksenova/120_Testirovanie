@@ -9,18 +9,20 @@
       Title="StudentsView">
 
     <Grid>
-        <ListView x:Name="students" Margin="0,0,0,0">
+        <ComboBox SelectionChanged="Filter_SelectionChanged" x:Name="Filter" MinWidth="150" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber"></ComboBox>
+        <ListView x:Name="students" Margin="0,30,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding StudentID, StringFormat=Номер студенческого: {0}}"/>
-                                    <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding GroupNumber, StringFormat=Группа студента: {0}}"/>
+                                <StackPanel MouseDown="StackPanel_MouseDown">
+                                    <TextBlock x:Name="studentId"  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding StudentID, StringFormat=Номер студенческого: {0}}"/>
+                                    <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding Group.GroupNumber, StringFormat=Группа студента: {0}}"/>
                                     <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding FirstName, StringFormat=Имя: {0}}"/>
                                     <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding SecondName, StringFormat=Фамилия: {0}}"/>
                                     <TextBlock  FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Text="{Binding Patronymic, StringFormat=Отчество: {0}}"/>
+                                    <Button Click="Button_Click" Margin="50,0,0,0" Height="auto" MinWidth="150" Content="Delete" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left"></Button>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

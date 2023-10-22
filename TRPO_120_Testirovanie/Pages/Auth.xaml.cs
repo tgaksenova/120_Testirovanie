@@ -42,10 +42,10 @@ namespace TRPO_Testirovanie
 
             if (req.Count() > 0 && req.First().ToString()==Password.Password)
             {
-                var role = from z in App.users
-                           where z.Login == Login.Text
-                           select z.Role.RoleName;
-
+                //var role = from z in App.users
+                //           where z.Login == Login.Text
+                //           select z.Role.RoleName;
+                var role = App.users.Where(x => x.Login == Login.Text).Select(x => x.Role.RoleName).ToList();
                 App.mainPage = new MainPage(role.First().ToString());
                 mainWindow.mainFrame.Navigate(App.mainPage);
 

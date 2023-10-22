@@ -69,13 +69,15 @@ namespace TRPO_Testirovanie
                             {
                                 Login = Login.Text,
                                 Password = Password.Password,
-                                RoleID = role
+                                RoleID = role,
+                                Role=App.role.Where(x=>x.ID==role).First()
                             };
 
-                            App.users.Add(user);
+                            //App.users.Add(user);
                             testirovanie.Users.Add(user);
                             testirovanie.SaveChanges();
-                            testirovanie.Dispose();
+                            App.users = testirovanie.Users.ToList();
+                            
 
                             App.auth = new Auth();
                             mainWindow.mainFrame.Navigate(App.auth);
@@ -97,6 +99,7 @@ namespace TRPO_Testirovanie
             {
                 MessageBox.Show("Введите логин");
             }
+            testirovanie.Dispose();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

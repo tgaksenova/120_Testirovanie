@@ -24,7 +24,7 @@ namespace TRPO_120_Testirovanie
         public TestsView()
         {
             InitializeComponent();
-            Testirovanie testirovanie = new Testirovanie();
+            //Testirovanie testirovanie = new Testirovanie();
             var req = from x in App.TestsList
                       select new { x.TestDate, x.StudentID, x.SpentTime, x.CorrectAmount, x.QuestionsAmount, x.StudentMark };
             tests.ItemsSource = req.ToList();

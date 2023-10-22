@@ -67,5 +67,29 @@ namespace TRPO_120_Testirovanie
             App.Add_Edit = new Add_Edit();
             dbFrame.Navigate(App.Add_Edit);
         }
+
+
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (this.dbFrame.NavigationService.Content.GetType().ToString().Replace("TRPO_120_Testirovanie.", "") == "StudentsView")
+                {
+                    //try {
+                        App.studentsView.students.ItemsSource = App.StudenInformationList.Where(x => x.FirstName.ToLower().Contains(Search.Text.ToLower()) || x.SecondName.ToLower().Contains(Search.Text.ToLower()) || x.Patronymic.ToLower().Contains(Search.Text.ToLower())).Where(x => x.Group.GroupNumber ==(App.studentsView.Filter.SelectedValue!=null?App.studentsView.Filter.SelectedValue:"").ToString()).ToList();
+
+                    //}
+                    //catch (System.InvalidCastException ex) 
+                    //{
+                    //    App.studentsView.students.ItemsSource = App.StudenInformationList.Where(x => x.FirstName.ToLower().Contains(Search.Text.ToLower()) || x.SecondName.ToLower().Contains(Search.Text.ToLower()) || x.Patronymic.ToLower().Contains(Search.Text.ToLower())).Cast<List<StudenInformation>>().ToList();
+                    //    throw ex;
+
+                    //}
+                }
+            }
+            catch (System.NullReferenceException ex) {
+                throw ex;
+            }
+        }
     }
 }
