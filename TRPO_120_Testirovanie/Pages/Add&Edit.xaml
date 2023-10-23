@@ -7,11 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Add_Edit"
-      Background="Wheat">
+      Background="White">
 
     <Grid>
         <Label Content="Группа студента" VerticalContentAlignment="Bottom" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,0,300,250"/>
-        <ComboBox x:Name="groupChoise" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="50" Width="200" Margin="0,0,300,150"></ComboBox>
+        <ComboBox x:Name="groupChoise" Text="Выберите группу" IsEditable="True" IsReadOnly="True" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="50" Width="200" Margin="0,0,300,150"></ComboBox>
 
         <Label Content="Имя студнта" VerticalAlignment="Center" VerticalContentAlignment="Bottom" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,0,300,50"/>
         <TextBox x:Name="FirstName" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" VerticalContentAlignment="Center" Width="200" Margin="0,50,300,0"></TextBox>

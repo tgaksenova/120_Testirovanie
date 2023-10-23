@@ -37,6 +37,8 @@ namespace TRPO_Testirovanie
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Application.Current.Resources = new ResourceDictionary() { Source = new Uri("pack://application:,,,/Style.xaml") };
+
             Testirovanie testirovanie = new Testirovanie();
             TestsList = testirovanie.TestReport.ToList();
             StudenInformationList = testirovanie.StudenInformation.ToList();
@@ -45,6 +47,7 @@ namespace TRPO_Testirovanie
             questTypes = testirovanie.QuestType.ToList();
             users = testirovanie.Users.ToList();
             role = testirovanie.Role.ToList();
+
             //testirovanie.Dispose();
         }
     }

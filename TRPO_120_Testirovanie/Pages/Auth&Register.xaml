@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Auth_Register"
-      Background="Wheat">
+      Background="White">
 
     <Grid>
         <Button VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="120" Content="Вход" Margin="0,0,150,0" Click="Auth_Click"></Button>

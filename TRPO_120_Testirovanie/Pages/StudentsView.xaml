@@ -9,8 +9,14 @@
       Title="StudentsView">
 
     <Grid>
-        <ComboBox SelectionChanged="Filter_SelectionChanged" x:Name="Filter" MinWidth="150" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber"></ComboBox>
-        <ListView x:Name="students" Margin="0,30,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <ComboBox SelectionChanged="Filter_SelectionChanged" Grid.Row="0" IsEditable="True" FontSize="18" VerticalContentAlignment="Center" IsReadOnly="True" Text="--Выберите группу--" x:Name="Filter" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber"></ComboBox>
+
+        <ListView x:Name="students" Grid.Row="1" Margin="0,0,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
