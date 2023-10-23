@@ -15,6 +15,7 @@
         </Grid.RowDefinitions>
         
         <ComboBox SelectionChanged="Filter_SelectionChanged" Grid.Row="0" IsEditable="True" FontSize="18" VerticalContentAlignment="Center" IsReadOnly="True" Text="--Выберите группу--" x:Name="Filter" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding GroupNumber}" DisplayMemberPath="GroupNumber" SelectedValuePath="GroupNumber"></ComboBox>
+        <Button x:Name="ExcelBTN" Click="ExcelBTN_Click" Grid.Row="0" FontSize="18" VerticalContentAlignment="Center" Width="200" Content="Сохранить в Excel" HorizontalAlignment="Right"></Button>
 
         <ListView x:Name="students" Grid.Row="1" Margin="0,0,0,0">
             <ListView.View>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TRPO_Testirovanie;
+using excel = Microsoft.Office.Interop.Excel;
 
 namespace TRPO_120_Testirovanie
 {
     /// <summary>
     /// Логика взаимодействия для StudentsView.xaml
     /// </summary>
-    public partial class StudentsView : Page
+    public partial class StudentsView : System.Windows.Controls.Page
     {
         public StudentsView()
         {
@@ -94,6 +96,40 @@ namespace TRPO_120_Testirovanie
             }
 
             this.students.ItemsSource = ((List<StudenInformation>)students.ItemsSource).Where(x=>x.Group.GroupNumber== Filter.SelectedValue.ToString());
+        }
+
+        private void ExcelBTN_Click(object sender, RoutedEventArgs e)
+        {
+            var a =(List<StudenInformation>)students.ItemsSource;
+            if (a.Count<=0)
+            {
+                MessageBox.Show("Список пуст");
+            }
+            else
+            {
+                var ExcelApplication = new excel.Application();
+                ExcelApplication.Visible = true;
+                ExcelApplication.SheetsInNewWorkbook = 1;
+                Workbook workbook = ExcelApplication.Workbooks.Add(Type.Missing);
+                Worksheet worksheet = ExcelApplication.Worksheets.Item[1];
+                worksheet.Range[worksheet.Cells[1][1], worksheet.Cells[5][a.Count+1]].NumberFormat = "@";
+                worksheet.Cells[1][1] = "Номер студенческого";
+                worksheet.Cells[2][1] = "Группа студента";
+                worksheet.Cells[3][1] = "Имя";
+                worksheet.Cells[4][1] = "Фамилия";
+                worksheet.Cells[5][1] = "Отчество";
+                int i = 2;
+                foreach (var item in a)
+                {
+                    worksheet.Cells[1][i] = item.StudentID;
+                    worksheet.Cells[2][i] = item.Group.GroupNumber;
+                    worksheet.Cells[3][i] = item.FirstName;
+                    worksheet.Cells[4][i] = item.SecondName;
+                    worksheet.Cells[5][i] = item.Patronymic;
+                    i++;
+                }
+                worksheet.Columns.AutoFit();
+            }
         }
     }
 }
